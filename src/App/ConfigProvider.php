@@ -21,6 +21,7 @@ class ConfigProvider
         return [
             'dependencies' => $this->getDependencyConfig(),
             'templates'    => $this->getTemplates(),
+            'containerConfigCallables' => ['aaa']
         ];
     }
     
@@ -35,6 +36,7 @@ class ConfigProvider
                 Action\HelloAction::class => Action\HelloAction::class,
                 Middleware\HelloMiddleware::class =>Middleware\HelloMiddleware::class,
             ],
+            
         ];
     }
 

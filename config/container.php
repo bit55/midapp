@@ -9,7 +9,7 @@ $container = new League\Container\Container();
 // Register config service
 $container->share('config', $config);
 
-
+dump($config); 
 
 $factories = isset($config['dependencies']['factories']) ? $config['dependencies']['factories'] : [];
 foreach ($factories as $alias => $factory) {
@@ -22,13 +22,20 @@ $invokables = isset($config['dependencies']['invokables']) ? $config['dependenci
 foreach ($invokables as $alias => $name) {
     $container->share($alias, $name);
 }
-//dump($container);
+
+// TODO: Refactor it!
+$containerConfigCallables = isset($config['containerConfigCallables']) ? $config['containerConfigCallables'] : [];
+foreach ($containerConfigCallables as $fn) {
+    if(is_callable($fn)) {
+        $fn($container);
+    }
+}
+
+dump($config); exit;
+
 
 // Other dependencies
 // -----------------------------
-// TODO: Move to Bit55\Midcore\ConfigProvider
-$container->share(Bit55\Midcore\Middleware\ControllerHandlerMiddleware::class)->withArgument($container);
-$container->share(Bit55\Midcore\Middleware\ActionHandlerMiddleware::class)->withArgument($container);
-$container->share(Bit55\Midcore\Middleware\NotFoundHandler::class)->withArgument($container);
+
 // -----------------------------
 return $container;
