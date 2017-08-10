@@ -1,6 +1,8 @@
 .php_cs.cache
 composer.phar
 composer.lock
+nbproject
 node_modules
 phpunit.xml
 /vendor/
+/nbproject/private/

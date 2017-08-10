@@ -1,0 +1,16 @@
+AddDefaultCharset utf-8
+Options -Indexes
+
+php_value post_max_size 256M
+php_value upload_max_filesize 256M
+
+RewriteEngine On
+
+# избавляемся от www
+RewriteCond %{HTTP_HOST} ^www\.(.*) [NC]
+RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+
+# запросы на фронтальный контроллер
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ index.php [QSA,L]
