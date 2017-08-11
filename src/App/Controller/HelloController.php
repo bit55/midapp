@@ -2,13 +2,13 @@
 
 namespace App\Controller;
 
-use Bit55\Midcore\Controller\Controller;
+use Bit55\Midcore\Controller\AbstractController;
 use Zend\Diactoros\Response\HtmlResponse;
 
 /**
  * HelloController class
  */
-class HelloController extends Controller
+class HelloController extends AbstractController
 {
 
     /**
