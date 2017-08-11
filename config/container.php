@@ -34,6 +34,6 @@ foreach ($callables as $callable) {
 
 // Other dependencies
 // -----------------------------
-
+//$container->share(App\Middleware\ErrorHandler::class, App\Middleware\ErrorHandler::class);
 // -----------------------------
 return $container;
