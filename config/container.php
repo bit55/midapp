@@ -9,7 +9,7 @@ $container = new League\Container\Container();
 // Register config service
 $container->share('config', $config);
 
-dump($config); 
+//dump($config); 
 
 $factories = isset($config['dependencies']['factories']) ? $config['dependencies']['factories'] : [];
 foreach ($factories as $alias => $factory) {
@@ -23,16 +23,14 @@ foreach ($invokables as $alias => $name) {
     $container->share($alias, $name);
 }
 
-// TODO: Refactor it!
-$containerConfigCallables = isset($config['containerConfigCallables']) ? $config['containerConfigCallables'] : [];
-foreach ($containerConfigCallables as $fn) {
-    if(is_callable($fn)) {
-        $fn($container);
+$callables = isset($config['dependencies']['callables']) ? $config['dependencies']['callables'] : [];
+foreach ($callables as $callable) {
+    if(is_callable($callable)) {
+        $callable($container);
     }
 }
 
-dump($config); exit;
-
+//dump($config); exit;
 
 // Other dependencies
 // -----------------------------
