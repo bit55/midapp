@@ -23,13 +23,6 @@ foreach ($invokables as $alias => $name) {
     $container->share($alias, $name);
 }
 
-$callables = isset($config['dependencies']['callables']) ? $config['dependencies']['callables'] : [];
-foreach ($callables as $callable) {
-    if(is_callable($callable)) {
-        $callable($container);
-    }
-}
-
 //dump($config); exit;
 
 // Other dependencies
