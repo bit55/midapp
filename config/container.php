@@ -14,7 +14,7 @@ $container->share('config', $config);
 $factories = isset($config['dependencies']['factories']) ? $config['dependencies']['factories'] : [];
 foreach ($factories as $alias => $factory) {
     $container->share($alias, function() use ($container, $factory) {
-        return (new $factory())($container);
+        return (new $factory())($container, $alias);
     });
 }
 
