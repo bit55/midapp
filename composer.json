@@ -1,6 +1,6 @@
 {
     "name": "bit55/midapp",
-    "description": "Web application skeleton based on middleware core (Midcore). PSR-7, PSR-11, PSR-15 compatible also supports MVC-like style.",
+    "description": "Web application skeleton based on middleware core (Midcore). PSR-7, PSR-11, PSR-15 compatible",
     "type": "project",
     "license": "BSD-3-Clause",
     "authors": [
