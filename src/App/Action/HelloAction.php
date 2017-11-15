@@ -15,8 +15,10 @@ class HelloAction implements MiddlewareInterface
             'status' => 'ok',
             'params' => $request->getAttribute('routeParams'),
             'uri'    => $request->getUri()->getPath(),
-            'query'  => $request->getQueryParams(),
-            'attr'   => $request->getAttributes()
+            'ServerRequestInterface::getQueryParams'  => $request->getQueryParams(),
+            'ServerRequestInterface::getAttributes'   => $request->getAttributes(),
+            'timing'   => sprintf("%01.1f", (microtime(true) - REQUEST_TIME)*1000),
+            'memory'   => round(memory_get_peak_usage()/1024),
         ]);
     }
 }

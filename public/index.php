@@ -1,8 +1,6 @@
 <?php
 
 define("REQUEST_TIME", microtime(true));
-
-// Set default timezone
 date_default_timezone_set('Asia/Novosibirsk');
 
 // Delegate static file requests back to the PHP built-in webserver
@@ -16,20 +14,20 @@ chdir(dirname(__DIR__));
 require 'vendor/autoload.php';
 
 call_user_func(function () {
-    /** @var \Psr\Container\ContainerInterface $container */
-    $container = require 'config/container.php';
-    
     // ServerRequest instance
     $request = Zend\Diactoros\ServerRequestFactory::fromGlobals(
         $_SERVER, $_GET, $_POST, $_COOKIE, $_FILES
     );
     
+    /** @var \Psr\Container\ContainerInterface $container */
+    $container = require 'config/container.php';
     // Middleware pipeline
-    $pipeline = require 'config/middleware.php';
+    $pipeline = require 'config/pipeline.php';
     $dispatcher = new Middleland\Dispatcher($pipeline, $container);
     $response = $dispatcher->dispatch($request);
     
     // Emitting response
-    $container->get(Bit55\Midcore\Response\ResponseEmitterInterface::class)
-              ->emit($response);
+    $container
+        ->get(Bit55\Midcore\Response\ResponseEmitterInterface::class)
+        ->emit($response);
 });
