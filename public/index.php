@@ -15,9 +15,7 @@ require 'vendor/autoload.php';
 
 call_user_func(function () {
     // ServerRequest instance
-    $request = Zend\Diactoros\ServerRequestFactory::fromGlobals(
-        $_SERVER, $_GET, $_POST, $_COOKIE, $_FILES
-    );
+    $request = Zend\Diactoros\ServerRequestFactory::fromGlobals();
     
     /** @var \Psr\Container\ContainerInterface $container */
     $container = require 'config/container.php';
