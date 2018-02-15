@@ -18,11 +18,12 @@ $pipeline[] = Bit55\Midcore\Middleware\ErrorHandler::class;
 $pipeline[] = Bit55\Midcore\Middleware\FastRouteMiddleware::class;
 
 //  ActionMiddleware handlers
-$pipeline[] = Bit55\Midcore\Middleware\ActionHandler::class;
+$pipeline[] = Bit55\Midcore\Middleware\RouteActionHandler::class;
 
 // At this point, if no Response is return by any middleware, the
 // NotFoundHandler kicks in; alternately, you can provide other fallback
 // middleware to execute.
-$pipeline[] = Bit55\Midcore\Middleware\NotFoundHandler::class;
+//$pipeline[] = Bit55\Midcore\Middleware\NotFoundHandler::class;
+$pipeline[] = App\Middleware\NotFoundHandler::class;
 
 return $pipeline;

@@ -9,7 +9,7 @@ $container = new League\Container\Container();
 // Register config service
 $container->share('config', $config);
 
-//dump($config); 
+//dump($config); exit;
 
 $factories = isset($config['dependencies']['factories']) ? $config['dependencies']['factories'] : [];
 foreach ($factories as $alias => $factory) {

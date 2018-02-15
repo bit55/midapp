@@ -13,19 +13,26 @@ if (php_sapi_name() === 'cli-server'
 chdir(dirname(__DIR__));
 require 'vendor/autoload.php';
 
+use Zend\Diactoros\ServerRequestFactory;
+use Zend\Diactoros\Response\SapiEmitter;
+use Middleland\Dispatcher;
+
 call_user_func(function () {
-    // ServerRequest instance
-    $request = Zend\Diactoros\ServerRequestFactory::fromGlobals();
+    $app = new Bit55\Midcore\Application(
+        'config/container.php',
+        'config/pipeline.php'
+    );
+    $app->run();
     
-    /** @var \Psr\Container\ContainerInterface $container */
-    $container = require 'config/container.php';
+    /* // DI container
+    $container = include 'config/container.php';
     // Middleware pipeline
-    $pipeline = require 'config/pipeline.php';
-    $dispatcher = new Middleland\Dispatcher($pipeline, $container);
-    $response = $dispatcher->dispatch($request);
+    $pipeline = include 'config/pipeline.php';
     
-    // Emitting response
-    $container
-        ->get(Bit55\Midcore\Response\ResponseEmitterInterface::class)
-        ->emit($response);
+    $dispatcher = new Dispatcher($pipeline, $container);
+
+    // Process request
+    $request = ServerRequestFactory::fromGlobals();
+    
+    (new SapiEmitter())->emit($dispatcher->dispatch($request)); */
 });

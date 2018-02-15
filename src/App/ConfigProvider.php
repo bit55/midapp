@@ -16,18 +16,18 @@ class ConfigProvider
     {
         return [
             'dependencies' => [
+                'factories' => [
+                    Action\HelloAction::class => Action\AbstractActionFactory::class,
+                    Action\HelloTwigAction::class => Action\AbstractActionFactory::class,
+                    Middleware\NotFoundHandler::class => Middleware\NotFoundHandlerFactory::class,
+                ],
                 'invokables' => [
-                    Action\HelloAction::class => Action\HelloAction::class,
+                    Action\HelloJsonAction::class => Action\HelloJsonAction::class,
                     Middleware\HelloMiddleware::class =>Middleware\HelloMiddleware::class,
                 ]
             ],
             'templates'    => [
-                'defaultDirectory' => 'templates',
-                'namespaces' => [
-                    'app'       => 'templates/app',
-                    'error'     => 'templates/error',
-                    'layout'    => 'templates/layout',
-                ],
+                'defaultDirectory'  => 'templates',
             ],
         ];
     }

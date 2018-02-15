@@ -6,8 +6,9 @@ use Zend\ConfigAggregator\PhpFileProvider;
 
 // To enable or disable caching, set the boolean in `config/autoload/local.php`.
 $cacheConfig = [
-    'config_cache_path' => 'data/cache/config.cache.php',
+    'config_cache_path' => 'data/cache/config.cached.php',
     'config_cache_enabled' => false,
+    'routesConfig' => 'config/routes.php',
 ];
 
 $aggregator = new ConfigAggregator([
@@ -15,6 +16,7 @@ $aggregator = new ConfigAggregator([
     new ArrayProvider($cacheConfig),
     // Default Midcore config
     Bit55\Midcore\ConfigProvider::class,
+    Bit55\Templater\ConfigProvider::class,
     // Default App module config
     App\ConfigProvider::class,
     
